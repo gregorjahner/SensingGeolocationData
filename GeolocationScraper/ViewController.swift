@@ -14,6 +14,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     let locationManager:CLLocationManager = CLLocationManager()
     var timer = Timer()
+    let frequency:Int = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //locationManager.startUpdatingLocation()
 
         // start the timer
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
 
 
@@ -40,14 +41,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
       for currentLocation in locations{
-        //print("\(index) locations: \(currentLocation)")
-        print("locations: \(currentLocation)")
+        print("locations = \(currentLocation.coordinate)")
+        print("altitude = \(currentLocation.altitude)")
+        print("timestamp = \(currentLocation.timestamp)")
       }
     }
 
     func timerAction() {
       locationManager.startUpdatingLocation()
-      print("test.")
+      locationManager.stopUpdatingLocation()
     }
 
 
