@@ -24,11 +24,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func startTapped(_ sender: Any) {
         print("started location process.")
 
-        //locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        //locationManager.startUpdatingLocation()
+        self.locationManager.requestAlwaysAuthorization()
+        //self.locationManager.requestWhenInUseAuthorization()
+
+        if (CLLocationManager.locationServicesEnabled()) {
+          locationManager.delegate = self
+          locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+          locationManager.startUpdatingLocation()
+        }
 
         // start the timer
         timer = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
@@ -47,16 +50,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("timestamp = \(currentLocation.timestamp)")
       }
       */
+      var locValue:CLLocationCoordinate2D = manager.location.coordinate
+      print("locations = \(locValue.latitude) \(locValue.longitude)")
+
+      /**
       if let currentLocation = locations.first{
         print("locations = \(currentLocation.coordinate)")
         print("altitude = \(currentLocation.altitude)")
         print("timestamp = \(currentLocation.timestamp)")
+        print("")
       }
+      */
     }
 
     @objc func timerAction() {
       locationManager.startUpdatingLocation()
-      locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+      //locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
       locationManager.stopUpdatingLocation()
     }
 
