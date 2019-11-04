@@ -38,7 +38,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func endTapped(_ sender: Any) {
       locationManager.stopUpdatingLocation()
     }
-
+    /**
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
       /**
       for currentLocation in locations{
@@ -53,9 +53,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("timestamp = \(currentLocation.timestamp)")
       }
     }
+    */
 
     @objc func timerAction() {
       locationManager.startUpdatingLocation()
+      
+      if let currentLocation = locations.first{
+        print("locations = \(currentLocation.coordinate)")
+        print("altitude = \(currentLocation.altitude)")
+        print("timestamp = \(currentLocation.timestamp)")
+      }
       locationManager.stopUpdatingLocation()
     }
 
