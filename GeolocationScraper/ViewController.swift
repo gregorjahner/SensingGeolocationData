@@ -13,6 +13,7 @@ import CoreLocation
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     let locationManager:CLLocationManager = CLLocationManager()
+    var timer = Timer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
+
+        // start the timer
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
 
 
@@ -39,7 +43,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("\(index) locations: \(currentLocation)")
         print("locations: \(currentLocation)")
       }
-  }
+    }
+
+    func timerAction() {
+      locationManager.startUpdatingLocation()
+      print("test.")
+    }
 
 
 }
