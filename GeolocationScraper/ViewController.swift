@@ -56,7 +56,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @objc func timerAction() {
       locationManager.startUpdatingLocation()
-      //locationManager.stopUpdatingLocation()
+      locationManager.stopUpdatingLocation()
     }
 
 
