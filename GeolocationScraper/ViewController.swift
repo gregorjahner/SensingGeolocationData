@@ -34,5 +34,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       locationManager.stopUpdatingLocation()
     }
 
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+      for currentLocation in locations{
+        print("\(index) locations: \(currentLocation)")
+      }
+  }
 
+  
 }
