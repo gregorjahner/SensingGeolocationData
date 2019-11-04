@@ -14,7 +14,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     let locationManager:CLLocationManager = CLLocationManager()
     var timer = Timer()
-    let frequency:Int = 10
+    let frequency:Double = 10.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
