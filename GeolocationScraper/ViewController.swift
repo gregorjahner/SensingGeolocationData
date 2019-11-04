@@ -31,7 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //locationManager.startUpdatingLocation()
 
         // start the timer
-        timer = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
 
 
