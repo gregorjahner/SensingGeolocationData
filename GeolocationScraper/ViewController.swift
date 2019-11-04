@@ -37,8 +37,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
       for currentLocation in locations{
         print("\(index) locations: \(currentLocation)")
+        print("locations: \(currentLocation)")
       }
   }
 
-  
+
 }
