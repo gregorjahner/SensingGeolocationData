@@ -8,13 +8,17 @@
 
 import UIKit
 import CoreLocation
+import MessageUI
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
 
     let locationManager:CLLocationManager = CLLocationManager()
     var timer = Timer()
     let frequency:Double = 5.0
+
+    let fileName = "test.csv"
+    let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 
     @IBAction func startTapped(_ sender: Any) {
+        var csvText = "Latitude, Longitude, Altitude, Timestamp\n"
+
         print("started location process.")
 
         self.locationManager.requestAlwaysAuthorization()
@@ -64,9 +70,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @objc func timerAction() {
+      /*
       locationManager.startUpdatingLocation()
       //locationManager(_, manager: CLLocationManager, didUpdateLocations, locations: [CLLocation])
       locationManager.stopUpdatingLocation()
+      */
+      locationManager.requestLocation()
+      var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
+
+      let newLine = "\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)\n"
+      csvText.appendContentsOf(newLine)
     }
 
 
