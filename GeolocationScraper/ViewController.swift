@@ -12,9 +12,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
+    
+    
+    @IBAction func startTapped(_ sender: Any) {
+        print("started location process.")
+    }
+    
+    
+    @IBAction func endTapped(_ sender: Any) {
+    }
+    
 
 }
 
