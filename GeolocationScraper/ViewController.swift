@@ -65,7 +65,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       } else {
         self.showSendMailErrorAlert()
       }
-      */
+      
     }
 
     @objc func timerAction() {
