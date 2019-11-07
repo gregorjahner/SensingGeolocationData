@@ -97,8 +97,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let mailComposerVC = MFMailComposeViewController()
       mailComposerVC.mailComposeDelegate = self
       mailComposerVC.setToRecipients(["daniel.illner@outlook.de"])
-      mailComposerVC.setSubject("Sending you the location data..")
-      mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+      mailComposerVC.setSubject("Location Data.")
+      mailComposerVC.setMessageBody("Sending location data as csv file via e-mail.", isHTML: false)
 
       return mailComposerVC
     }
