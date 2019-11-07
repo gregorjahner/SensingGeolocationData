@@ -18,7 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     let frequency:Double = 5.0
 
     let fileName = "test.csv"
-    let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+    //let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
 
     @IBAction func startTapped(_ sender: Any) {
-        var csvText = "Latitude, Longitude, Altitude, Timestamp\n"
+        //var csvText = "Latitude, Longitude, Altitude, Timestamp\n"
 
         print("started location process.")
 
@@ -55,10 +55,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         print("altitude = \(currentLocation.altitude)")
         print("timestamp = \(currentLocation.timestamp)")
       }
-      */
       var locValue:CLLocationCoordinate2D = manager.location.coordinate
       print("locations = \(locValue.latitude) \(locValue.longitude)")
-
+        */
       /**
       if let currentLocation = locations.first{
         print("locations = \(currentLocation.coordinate)")
@@ -75,11 +74,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       //locationManager(_, manager: CLLocationManager, didUpdateLocations, locations: [CLLocation])
       locationManager.stopUpdatingLocation()
       */
-      locationManager.requestLocation()
-      var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
-
+      //locationManager.requestLocation()
+      locationManager.startUpdatingLocation()
+      var locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
+        print("\(locValue.latitude), \(locValue.longitude)")
+      locationManager.stopUpdatingLocation()
+      /*
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)\n"
       csvText.appendContentsOf(newLine)
+      */
     }
 
 
