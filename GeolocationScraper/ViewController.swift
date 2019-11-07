@@ -55,9 +55,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         } catch {
           print("error creating file")
         }
-        
+
       let mailComposeViewController = configuredMailComposeViewController()
-        
+
       let url = URL(fileURLWithPath: csvText)
       print(url)
 
@@ -96,7 +96,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     func configuredMailComposeViewController() -> MFMailComposeViewController {
       let mailComposerVC = MFMailComposeViewController()
       mailComposerVC.mailComposeDelegate = self
-      mailComposerVC.setToRecipients(["daniel.illner@outlook.de"])
+      mailComposerVC.setToRecipients(["gregor.jahner@gmx.de"])
       mailComposerVC.setSubject("Location Data.")
       mailComposerVC.setMessageBody("Sending location data as csv file via e-mail.", isHTML: false)
 
@@ -104,8 +104,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     }
 
     func showSendMailErrorAlert() {
-      let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
-      sendMailErrorAlert.show()
+      let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.", preferredStyle: .alert)
+      let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+      sendMailErrorAlert.addAction(dismiss)
+      self.present(sendMailErrorAlert, animated: true, completion: nil)
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
