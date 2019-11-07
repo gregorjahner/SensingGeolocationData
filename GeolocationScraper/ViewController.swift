@@ -17,9 +17,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     var timer = Timer()
     let frequency:Double = 5.0
 
-    let fileName = "test.csv"
-    let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -38,6 +35,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
           locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
           locationManager.startUpdatingLocation()
         }
+
+        let fileName = "test.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+        var csvText = "Latitude, Longitude, altValue, timeStamp\n"
 
         // start the timer
         timer = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
@@ -76,11 +77,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let timeStamp:Date = locationManager.location!.timestamp
       print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
       //locationManager.stopUpdatingLocation()
-      /*
-      let newLine = "\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)\n"
+
+      let newLine = "\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)\n"
       csvText.appendContentsOf(newLine)
-      */
+
     }
+
+    /**
+    @IBAction func export(sender: AnyObject) {
+      let fileName = "test.csv"
+      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+    }
+    */
 
 
 }
