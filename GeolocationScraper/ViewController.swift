@@ -18,7 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     let frequency:Double = 5.0
 
     let fileName = "test.csv"
-    //let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+    let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,15 +69,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     */
 
     @objc func timerAction() {
-      /*
-      locationManager.startUpdatingLocation()
-      //locationManager(_, manager: CLLocationManager, didUpdateLocations, locations: [CLLocation])
-      locationManager.stopUpdatingLocation()
-      */
       //locationManager.requestLocation()
       locationManager.startUpdatingLocation()
-      var locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
-        print("\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)")
+      let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
+      let altValue:CLLocationDistance = locationManager.location!.altitude
+      let timeStamp:Date = locationManager.location!.timestamp
+      print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
       //locationManager.stopUpdatingLocation()
       /*
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)\n"
