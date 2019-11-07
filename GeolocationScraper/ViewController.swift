@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MessageUI
+import Foundation
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
@@ -84,13 +85,39 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
     }
 
-        
-    /*
-    @IBAction func export(sender: AnyObject) {
-      let fileName = "test.csv"
-      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+      let mailComposerVC = MFMailComposeViewController()
+      mailComposerVC.mailComposeDelegate = self
+      mailComposerVC.setToRecipients(["daniel.illner@outlook.de"])
+      mailComposerVC.setSubject("Sending you the location data..")
+      mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+
+      return mailComposerVC
     }
- */
+
+    func showSendMailErrorAlert() {
+      let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+      sendMailErrorAlert.show()
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+      controller.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func export(sender: AnyObject) {
+      let fileName = "locations.csv"
+      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+
+      let mailComposeViewController = configuredMailComposeViewController()
+
+      mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
+      //presentViewController(emailController, animated: true, completion: nil)
+      if MFMailComposeViewController.canSendMail() {
+        self.present(mailComposeViewController, animated: true, completion: nil)
+      } else {
+        self.showSendMailErrorAlert()
+      }
+    }
 
 
 }
