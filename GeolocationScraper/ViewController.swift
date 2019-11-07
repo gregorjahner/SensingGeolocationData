@@ -45,10 +45,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
 
     @IBAction func endTapped(_ sender: Any) {
-      locationManager.stopUpdatingLocation()
+      //locationManager.stopUpdatingLocation()
+      timer.invalidate()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+      //locationManager.startUpdatingLocation()
       /**
       for currentLocation in locations{
         print("locations = \(currentLocation.coordinate)")
@@ -78,7 +80,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       locationManager.startUpdatingLocation()
       var locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
         print("\(locValue.latitude), \(locValue.longitude)")
-      locationManager.stopUpdatingLocation()
+      //locationManager.stopUpdatingLocation()
       /*
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)\n"
       csvText.appendContentsOf(newLine)
