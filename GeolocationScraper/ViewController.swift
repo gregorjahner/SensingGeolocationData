@@ -45,6 +45,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       timer.invalidate()
       print(csvText)
 
+      let fileName = "Locations.csv"
+      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+      do {
+        try csvText.writeToURL(path, atomically: true, encoding: NSUTF8StringEncoding)
+      } catch {
+        print("Failed to create file")
+        print("\(error)")
+      }
+
       // Sending Data via Email
       //let fileName = "locations.csv"
       //guard let csvPath = Bundle.main.path(forResource: fileName, ofType: "csv") else { return }
