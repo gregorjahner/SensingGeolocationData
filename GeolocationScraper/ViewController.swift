@@ -25,8 +25,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
 
     @IBAction func startTapped(_ sender: Any) {
-        //var csvText = "Latitude, Longitude, Altitude, Timestamp\n"
-
         print("started location process.")
 
         self.locationManager.requestAlwaysAuthorization()
@@ -35,12 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         if (CLLocationManager.locationServicesEnabled()) {
           locationManager.delegate = self
           locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-          locationManager.startUpdatingLocation()
         }
-
-        //let fileName = "test.csv";
-        //let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName);
-        //var csvText = "Latitude, Longitude, altValue, timeStamp\n";
 
         // start the timer
         timer = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
@@ -50,6 +43,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     @IBAction func endTapped(_ sender: Any) {
       //locationManager.stopUpdatingLocation()
       timer.invalidate()
+
+      // Sending Data via Email
+      let fileName = "locations.csv"
+      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+
+      try csvText.writeToURL(path, atomically: true, encoding: NSUTF8StringEncoding)
+
+      let mailComposeViewController = configuredMailComposeViewController()
+
+      mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
+      //presentViewController(emailController, animated: true, completion: nil)
+      if MFMailComposeViewController.canSendMail() {
+        self.present(mailComposeViewController, animated: true, completion: nil)
+      } else {
+        self.showSendMailErrorAlert()
+      }
     }
 
     /**
@@ -81,7 +90,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       //locationManager.stopUpdatingLocation()
 
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)\n"
-        csvText.append(contentsOf: newLine)
+      csvText.append(contentsOf: newLine)
 
     }
 
@@ -104,6 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       controller.dismiss(animated: true, completion: nil)
     }
 
+    /**
     @IBAction func export(sender: AnyObject) {
       let fileName = "locations.csv"
       let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
@@ -118,6 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         self.showSendMailErrorAlert()
       }
     }
+    */
 
 
 }
