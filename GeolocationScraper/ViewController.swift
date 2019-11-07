@@ -45,7 +45,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       timer.invalidate()
       print(csvText)
 
-
+      // Sending Data via Email
       let fileName = "locations.csv"
       let fileManager = FileManager.default
       do {
@@ -56,18 +56,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
           print("error creating file")
         }
 
-    
-      // Sending Data via Email
-      //let fileName = "locations.csv"
-      //guard let csvPath = Bundle.main.path(forResource: fileName, ofType: "csv") else { return }
-
-      //let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
-
-      //try csvText.writeToURL(path, atomically: true, encoding: NSUTF8StringEncoding)
-      /*
       let mailComposeViewController = configuredMailComposeViewController()
 
-      //mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
+      mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
       //presentViewController(emailController, animated: true, completion: nil)
       if MFMailComposeViewController.canSendMail() {
         self.present(mailComposeViewController, animated: true, completion: nil)
@@ -77,25 +68,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       */
     }
 
-    /**
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-      //locationManager.startUpdatingLocation()
-      for currentLocation in locations{
-        print("locations = \(currentLocation.coordinate)")
-        print("altitude = \(currentLocation.altitude)")
-        print("timestamp = \(currentLocation.timestamp)")
-      }
-      var locValue:CLLocationCoordinate2D = manager.location.coordinate
-      print("locations = \(locValue.latitude) \(locValue.longitude)")
-      if let currentLocation = locations.first{
-        print("locations = \(currentLocation.coordinate)")
-        print("altitude = \(currentLocation.altitude)")
-        print("timestamp = \(currentLocation.timestamp)")
-        print("")
-      }
-    }
-    */
-
     @objc func timerAction() {
       //locationManager.requestLocation()
       locationManager.startUpdatingLocation()
@@ -103,7 +75,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let altValue:CLLocationDistance = locationManager.location!.altitude
       let timeStamp:Date = locationManager.location!.timestamp
       //print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
-      //locationManager.stopUpdatingLocation()
 
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)\n"
       csvText.append(contentsOf: newLine)
