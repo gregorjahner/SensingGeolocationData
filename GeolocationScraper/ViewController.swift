@@ -114,22 +114,4 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       controller.dismiss(animated: true, completion: nil)
     }
 
-    /**
-    @IBAction func export(sender: AnyObject) {
-      let fileName = "locations.csv"
-      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
-
-      let mailComposeViewController = configuredMailComposeViewController()
-
-      mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
-      //presentViewController(emailController, animated: true, completion: nil)
-      if MFMailComposeViewController.canSendMail() {
-        self.present(mailComposeViewController, animated: true, completion: nil)
-      } else {
-        self.showSendMailErrorAlert()
-      }
-    }
-    */
-
-
 }
