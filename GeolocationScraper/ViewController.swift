@@ -46,22 +46,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       print(csvText)
 
       // Sending Data via Email
-      let fileName = "locations.csv"
+      //let fileName = "locations.csv"
       //guard let csvPath = Bundle.main.path(forResource: fileName, ofType: "csv") else { return }
 
       //let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
 
       //try csvText.writeToURL(path, atomically: true, encoding: NSUTF8StringEncoding)
-
+      /*
       let mailComposeViewController = configuredMailComposeViewController()
 
-      mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
+      //mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
       //presentViewController(emailController, animated: true, completion: nil)
       if MFMailComposeViewController.canSendMail() {
         self.present(mailComposeViewController, animated: true, completion: nil)
       } else {
         self.showSendMailErrorAlert()
       }
+      */
     }
 
     /**
@@ -89,11 +90,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
       let altValue:CLLocationDistance = locationManager.location!.altitude
       let timeStamp:Date = locationManager.location!.timestamp
-      print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
+      //print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
       //locationManager.stopUpdatingLocation()
 
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)\n"
       csvText.append(contentsOf: newLine)
+      print("timer step.")
 
     }
 
