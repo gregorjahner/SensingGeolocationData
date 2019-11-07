@@ -49,9 +49,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       timer.invalidate()
     }
 
+    /**
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
       //locationManager.startUpdatingLocation()
-      /**
       for currentLocation in locations{
         print("locations = \(currentLocation.coordinate)")
         print("altitude = \(currentLocation.altitude)")
@@ -59,16 +59,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       }
       var locValue:CLLocationCoordinate2D = manager.location.coordinate
       print("locations = \(locValue.latitude) \(locValue.longitude)")
-        */
-      /**
       if let currentLocation = locations.first{
         print("locations = \(currentLocation.coordinate)")
         print("altitude = \(currentLocation.altitude)")
         print("timestamp = \(currentLocation.timestamp)")
         print("")
       }
-      */
     }
+    */
 
     @objc func timerAction() {
       /*
@@ -79,7 +77,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       //locationManager.requestLocation()
       locationManager.startUpdatingLocation()
       var locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
-        print("\(locValue.latitude), \(locValue.longitude)")
+        print("\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)")
       //locationManager.stopUpdatingLocation()
       /*
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(locationManager.altitude), \(locationManager.timestamp)\n"
