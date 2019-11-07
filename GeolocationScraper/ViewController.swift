@@ -46,13 +46,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
       // Sending Data via Email
       let fileName = "locations.csv"
-      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName)
+      let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
 
-      try csvText.writeToURL(path, atomically: true, encoding: NSUTF8StringEncoding)
+      //try csvText.writeToURL(path, atomically: true, encoding: NSUTF8StringEncoding)
 
       let mailComposeViewController = configuredMailComposeViewController()
 
-      mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
+      //mailComposeViewController.addAttachmentData(NSData(contentsOfURL: path)!, mimeType: "text/csv", fileName: "locations.csv")
       //presentViewController(emailController, animated: true, completion: nil)
       if MFMailComposeViewController.canSendMail() {
         self.present(mailComposeViewController, animated: true, completion: nil)
@@ -86,11 +86,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
       let altValue:CLLocationDistance = locationManager.location!.altitude
       let timeStamp:Date = locationManager.location!.timestamp
-      print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
+      //print("\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)")
       //locationManager.stopUpdatingLocation()
 
       let newLine = "\(locValue.latitude), \(locValue.longitude), \(altValue), \(timeStamp)\n"
       csvText.append(contentsOf: newLine)
+      print(csvText)
 
     }
 
@@ -98,8 +99,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let mailComposerVC = MFMailComposeViewController()
       mailComposerVC.mailComposeDelegate = self
       mailComposerVC.setToRecipients(["daniel.illner@outlook.de"])
-      mailComposerVC.setSubject("Sending you the location data..")
-      mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+      mailComposerVC.setSubject("Location data")
+      mailComposerVC.setMessageBody("Sending you the location data via e-mail!", isHTML: false)
 
       return mailComposerVC
     }
