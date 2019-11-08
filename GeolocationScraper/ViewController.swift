@@ -65,7 +65,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
       do {
         //let attachmentData = try Data(contentsOf: url)
-        let attachmentData = NSData(contentsOfFile: fileURL)
+        let attachmentData = Data(contentsOfFile: fileURL)
         print("Test Attachment")
         mailComposeViewController.addAttachmentData(attachmentData, mimeType: "text/csv", fileName: "locations.csv")
         print("test test")
