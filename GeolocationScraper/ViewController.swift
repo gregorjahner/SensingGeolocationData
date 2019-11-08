@@ -28,11 +28,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         print("started location process.")
 
         self.locationManager.requestAlwaysAuthorization()
-        //self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
 
         if (CLLocationManager.locationServicesEnabled()) {
           locationManager.delegate = self
-          locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+          locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
 
         // start the timer
@@ -63,6 +63,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
 
       do {
         let attachmentData = try Data(contentsOf: url)
+        print("Test Attachment")
         mailComposeViewController.addAttachmentData(attachmentData, mimeType: "text/csv", fileName: "locations.csv")
         print("test test")
         mailComposeViewController.mailComposeDelegate = self
