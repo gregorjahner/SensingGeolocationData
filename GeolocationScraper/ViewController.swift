@@ -59,7 +59,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let mailComposeViewController = configuredMailComposeViewController()
 
 
-        let attachmentData = csvText.data(using: String.Encoding.utf8, allowLossyConversion: false)
+      let attachmentData = csvText.data(using: String.Encoding.utf8, allowLossyConversion: false)
       //let url = URL(fileURLWithPath: fileURL)
       //let url = NSBundle.mainBundle().pathForResource(fileName, ofType: "csv")
       //let url = NSBundle.mainBundle().pathForResource(fileURL, ofType: "csv")
