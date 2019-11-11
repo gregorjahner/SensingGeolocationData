@@ -18,6 +18,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     var timer = Timer()
     let frequency:Double = 5.0
     var csvText = "Latitude, Longitude, Altitude, Timestamp\n"
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let mailComposeViewController = configuredMailComposeViewController()
 
 
+<<<<<<< HEAD
       let attachmentData = csvText.data(using: String.Encoding.utf8, allowLossyConversion: false)
       //let url = URL(fileURLWithPath: fileURL)
       //let url = NSBundle.mainBundle().pathForResource(fileName, ofType: "csv")
@@ -66,15 +69,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       //let bundle = Bundle.main
       //let url = bundle.path(forResource: "locations", ofType: "csv")
       //print(url)
+=======
+        let attachmentData = csvText.data(using: String.Encoding.utf8, allowLossyConversion: false)
+>>>>>>> 15a39c5bdfa6dc49331ec78005a9b538000cda6f
 
       do {
-        //let attachmentData = try Data(contentsOf: url)
-        //let attachmentData = Data(contentsOfFile: fileURL)
-        //let attachmentData = Data(contentsOfFile: url)
-        print("Test Attachment")
         mailComposeViewController.addAttachmentData(attachmentData!, mimeType: "text/csv", fileName: "location.csv")
-        //mailComposeViewController.addAttachmentData(attachmentData, mimeType: "text/csv", fileName: "locations.csv")
-        print("test test")
         mailComposeViewController.mailComposeDelegate = self
         self.present(mailComposeViewController, animated: true, completion: nil)
       } catch {
