@@ -18,6 +18,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     var timer = Timer()
     let frequency:Double = 5.0
     var csvText = "Latitude, Longitude, Altitude, Timestamp\n"
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +76,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         print("Test Attachment")
         mailComposeViewController.addAttachmentData(attachmentData!, mimeType: "text/csv", fileName: "location.csv")
         //mailComposeViewController.addAttachmentData(attachmentData, mimeType: "text/csv", fileName: "locations.csv")
-        print("test test")
         mailComposeViewController.mailComposeDelegate = self
         self.present(mailComposeViewController, animated: true, completion: nil)
       } catch {
