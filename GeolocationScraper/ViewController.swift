@@ -33,6 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         if (CLLocationManager.locationServicesEnabled()) {
           locationManager.delegate = self
           locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		  locationManager.allowsBackgroundLocationUpdates = YES;
         }
 
         // start the timer
