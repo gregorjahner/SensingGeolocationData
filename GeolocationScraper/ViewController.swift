@@ -28,7 +28,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         print("started location process.")
 
         self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
+        //self.locationManager.requestWhenInUseAuthorization()
 
         if (CLLocationManager.locationServicesEnabled()) {
           locationManager.delegate = self
