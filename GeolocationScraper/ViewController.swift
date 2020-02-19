@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  GeolocationScraper
 //
-//  Created by Gregor Jahner on 31.10.19.
-//  Copyright © 2019 Gregor Jahner. All rights reserved.
+//  Created by Daniel Illner on 31.10.19.
+//  Copyright © 2019 Daniel Illner. All rights reserved.
 //
 
 import UIKit
