@@ -33,7 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         if (CLLocationManager.locationServicesEnabled()) {
           locationManager.delegate = self
           locationManager.desiredAccuracy = kCLLocationAccuracyBest
-		  locationManager.allowsBackgroundLocationUpdates = YES;
+		  locationManager.allowsBackgroundLocationUpdates = true;
         }
 
         // start the timer
@@ -63,7 +63,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
       let attachmentData = csvText.data(using: String.Encoding.utf8, allowLossyConversion: false)
 
       do {
-        mailComposeViewController.addAttachmentData(attachmentData, mimeType: "text/csv", fileName: "locations.csv")
+        mailComposeViewController.addAttachmentData(attachmentData!, mimeType: "text/csv", fileName: "locations.csv")
 
         mailComposeViewController.mailComposeDelegate = self
         self.present(mailComposeViewController, animated: true, completion: nil)
