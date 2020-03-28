@@ -12,7 +12,8 @@ DATA_PATH = ROOT_PATH.joinpath("data")
 class DataLoader():
 
     def __init__(self):
-        data = self.read_file()
+        pass
+        #data = self.read_file()
 
 
     def read_file(self):
@@ -21,12 +22,14 @@ class DataLoader():
         :returns concatenated datafiles (.csv) as a pandas dataframe.
         '''
         counter = 0
-
         for file in os.listdir(DATA_PATH):
             filename = os.fsdecode(file)
             if filename.endswith(".csv"):
                 counter += 1
-                df = pd.read_csv(os.path.join(DATA_PATH, filename))
+                df = pd.read_csv(os.path.join(DATA_PATH, filename), delimiter=',', encoding="utf-8-sig")
+                df.rename(columns=lambda x: x.strip(), inplace=True)
+
+                df = df.drop_duplicates(subset=['Timestamp'])
 
                 if counter == 1:
                     df_complete = df
@@ -38,10 +41,7 @@ class DataLoader():
             else:
                 print("Error encountered while parsing file: ", filename)
 
+        print('Dataframe shape: ', df_complete.shape)
         print(df_complete.head(20))
-        print(df_complete.shape)
 
         return (df_complete)
-
-
-dl = DataLoader()
