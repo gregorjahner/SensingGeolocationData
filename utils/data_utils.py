@@ -45,3 +45,14 @@ class DataLoader():
         print(df_complete.head(20))
 
         return (df_complete)
+
+    def convert_to_np(self, dataframe, dimension=2):
+        # Convert pandas dataframe to numpy array
+        if dimension == 2:
+            array = dataframe[['Latitude','Longitude']].to_numpy()
+        elif dimension == 3:
+            array = dataframe[['Latitude','Longitude', 'Altitude']].to_numpy()
+        else:
+            print("Error occured - dimensionality is illegal: ", dimension)
+
+        return (array)
