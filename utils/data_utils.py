@@ -46,6 +46,7 @@ class DataLoader():
 
         return (df_complete)
 
+
     def convert_to_np(self, dataframe, dimension=2):
         # Convert pandas dataframe to numpy array
         if dimension == 2:
@@ -56,3 +57,13 @@ class DataLoader():
             print("Error occured - dimensionality is illegal: ", dimension)
 
         return (array)
+
+
+    def drop_nth_row(self, dataframe, nth_row=2):
+        '''
+        :params dataframe: pandas dataframe.
+        :params nth_row: Selects every nth row starting from 0.
+        :returns pandas dataframe with reduced number of rows.
+        '''
+        df_reduced = dataframe[dataframe.index % nth_row == 0]
+        return (df_reduced)
