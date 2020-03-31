@@ -15,7 +15,7 @@ class DataLoader():
         pass
 
 
-    def read_file(self):
+    def read_files(self):
         '''
         Reading in the .csv datafiles and concatenate them together in one dataframe.
         :returns concatenated datafiles (.csv) as a pandas dataframe.
@@ -84,3 +84,8 @@ class DataLoader():
 
         tops = pivt.iloc[:rank]
         return (tops.reset_index())
+
+
+    def drop_duplicates(self, dataframe):
+        # Dropping the spatioal coordinates that are saved in the dataset more than one time.
+        return dataframe.drop_duplicates(subset=['Latitude', 'Longitude', 'Altitude'])
