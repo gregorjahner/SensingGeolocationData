@@ -13,7 +13,6 @@ class DataLoader():
 
     def __init__(self):
         pass
-        #data = self.read_file()
 
 
     def read_file(self):
@@ -67,3 +66,21 @@ class DataLoader():
         '''
         df_reduced = dataframe[dataframe.index % nth_row == 0]
         return (df_reduced)
+
+
+    def find_popular_spots(self, dataframe, rank, dimension=3):
+        '''
+        Built to find duplicates that show us the top ranked spots in the dataframe.
+        :params dataframe: pandas dataframe.
+        :params rank: Integer that defines the number of spots.
+        :returns pandas dataframe with top ranked datapoints.
+        '''
+        if dimension == 2:
+            pivt = dataframe.pivot_table(index=['Latitude', 'Longitude'], aggfunc='size').sort_values(ascending=False)
+        elif dimension == 3:
+            pivt = dataframe.pivot_table(index=['Latitude', 'Longitude', 'Altitude'], aggfunc='size').sort_values(ascending=False)
+        else:
+            print("Error occured - dimensionality is illegal: ", dimension)
+
+        tops = pivt.iloc[:rank]
+        return (tops.reset_index())

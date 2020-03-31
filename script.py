@@ -17,11 +17,17 @@ if __name__ == "__main__":
 
     # prepare the dataframe for further actions.
     data = dl.read_file()
-    data = dl.drop_nth_row(data, nth_row=5)
+    #data = dl.drop_nth_row(data, nth_row=5)
     x = dl.convert_to_np(data)
 
-    print(x.shape)
+    df_top_spots = dl.find_popular_spots(data, rank=10)
 
+    print(df_top_spots)
+    #print(pivt.head(10))
+
+    #print(x.shape)
+
+    """
     cf = ClusteringFrame()
     k = 100
     centroids, clustering = cf.kmeans(x, k, iterations=20)
@@ -29,3 +35,4 @@ if __name__ == "__main__":
     print(centroids)
 
     #visualize_dataframe(data)
+    """
