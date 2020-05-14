@@ -1,7 +1,9 @@
 import os
+import sys
+print(sys.version)
 import numpy as np
 import pandas as pd
-import sys
+
 
 # Print the whole numpy array
 np.set_printoptions(threshold=sys.maxsize)
@@ -16,7 +18,7 @@ if __name__ == "__main__":
     dl = DataLoader()
 
     # prepare the dataframe for further actions.
-    data = dl.read_file()
+    data = dl.read_files()
     #data = dl.drop_nth_row(data, nth_row=5)
     x = dl.convert_to_np(data)
 
